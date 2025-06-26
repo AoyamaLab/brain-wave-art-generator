@@ -380,9 +380,6 @@ http://localhost:5000
 - **GitHub Issues**: バグ報告や機能要求
 - **ディスカッション**: 一般的な質問や議論
 
-### よくある質問
-更新は[GitHub Wiki](https://github.com/your-username/brain-wave-art-generator/wiki)をご確認ください。
-
 ---
 
 **🧠 あなたの脳波を美しいアートに変えて、科学と芸術の融合を体験してください！ ✨**
