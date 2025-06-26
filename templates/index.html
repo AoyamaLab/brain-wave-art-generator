@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>脳波アート｜Brain Wave Art Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta name="description" content="脳波データから美しいアート作品を生成します">
+</head>
+
+<body>
+    <div class="container">
+        <!-- ヘッダーセクション -->
+        <div class="header">
+            <h1 class="title">脳波アート</h1>
+            <p class="subtitle">Brain Wave Art Generator</p>
+            <p class="description">
+                あなたの脳波データから美しいアート作品を生成します。<br>
+                EEGファイルをアップロードして、心の中の海を可視化しましょう。
+            </p>
+        </div>
+
+        <!-- エラーメッセージ -->
+        <div id="error" class="error"></div>
+
+        <!-- アップロードセクション -->
+        <div id="uploadSection" class="upload-section">
+            <div id="uploadArea" class="upload-area">
+                <i class="fas fa-brain upload-icon"></i>
+                <div class="upload-text">EEGファイルをドラッグ＆ドロップ</div>
+                <div class="upload-hint">または、クリックしてファイルを選択<br>(.eeg + .vhdr ファイルまたは個別選択)</div>
+                <input type="file" id="fileInput" class="file-input" accept=".eeg,.vhdr" multiple />
+            </div>
+
+            <!-- ファイル情報表示 -->
+            <div id="fileInfo" class="file-info">
+                <button id="fileClearBtn" class="file-clear-btn">×</button>
+                <div id="fileName" class="file-name"></div>
+                <div id="fileSize" class="file-size"></div>
+            </div>
+
+            <button id="uploadBtn" class="upload-btn">
+                <i class="fas fa-magic"></i> アート生成開始
+            </button>
+        </div>
+
+        <!-- ローディングセクション -->
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <div class="loading-text">
+                <i class="fas fa-palette"></i> 美しいアートを生成中...
+            </div>
+        </div>
+
+        <!-- 結果セクション -->
+        <div id="resultSection" class="result-section">
+            <!-- 結果タブナビゲーション -->
+            <div class="result-tab-navigation">
+                <button class="result-tab-btn active" data-tab="art-result">
+                    <i class="fas fa-palette"></i> アート
+                </button>
+                <button class="result-tab-btn" data-tab="analysis-result">
+                    <i class="fas fa-chart-bar"></i> 詳細解析
+                </button>
+            </div>
+
+            <!-- アート結果タブ -->
+            <div id="art-result-tab" class="result-tab-content active">
+                <h2 style="color: #64b5f6; margin-bottom: 30px; font-size: 2em;">
+                    <i class="fas fa-sparkles"></i> あなたの脳波アート
+                </h2>
+                <img id="resultImage" class="result-image" alt="Generated Brain Wave Art" />
+                <div style="margin-top: 30px;">
+                    <a id="downloadLink" class="download-btn">
+                        <i class="fas fa-download"></i> 高解像度で保存
+                    </a>
+                    <button id="newAnalysisBtn" class="new-analysis-btn">
+                        <i class="fas fa-plus"></i> 新しい解析
+                    </button>
+                </div>
+            </div>
+
+            <!-- 詳細解析結果タブ -->
+            <div id="analysis-result-tab" class="result-tab-content">
+                <h2 style="color: #64b5f6; margin-bottom: 30px; font-size: 2em;">
+                    <i class="fas fa-microscope"></i> 解析詳細データ
+                </h2>
+                <div id="analysisDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+
+</html>
