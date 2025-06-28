@@ -17,6 +17,9 @@ from scipy.signal import butter, filtfilt, iirnotch
 
 app = Flask(__name__)
 
+# セキュリティ設定
+app.secret_key = os.environ.get('SECRET_KEY', 'dev-key-change-in-production')
+
 # 日本語フォント設定
 matplotlib.rcParams['font.family'] = ['DejaVu Sans', 'Liberation Sans', 'Arial', 'sans-serif']
 matplotlib.rcParams['axes.unicode_minus'] = False
@@ -530,5 +533,11 @@ def analyze_eeg():
 
 if __name__ == '__main__':
     print("🧠 EEG Beautiful Visualizer")
-    print("Access: http://133.27.114.107")
-    app.run(host='0.0.0.0', port=80, debug=True)
+    print("Server starting...")
+
+    # 環境変数から設定を取得（本番環境では環境変数で設定）
+    host = os.environ.get('HOST', '127.0.0.1')
+    port = int(os.environ.get('PORT', 5000))
+    debug = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+    app.run(host=host, port=port, debug=debug)
